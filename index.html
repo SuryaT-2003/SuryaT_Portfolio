@@ -237,24 +237,33 @@
     </div>
 
     <script>
-        // Script for mobile menu toggle with animation
-        const navToggle = document.getElementById('nav-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const closeMenu = document.getElementById('close-menu');
+        document.addEventListener("DOMContentLoaded", function () {
+            const navToggle = document.getElementById("nav-toggle");
+            const mobileMenu = document.getElementById("mobile-menu");
+            const closeMenu = document.getElementById("close-menu");
+            const menuLinks = document.querySelectorAll("#mobile-menu a");
 
-        // Open the menu (slide-in from right)
-        navToggle.addEventListener('click', () => {
-            mobileMenu.classList.remove('translate-x-full');  // Removes the initial off-screen state
-            mobileMenu.classList.add('active');  // Set width to 40%
+            // Open Mobile Menu
+            navToggle.addEventListener("click", function () {
+                mobileMenu.style.width = "250px"; // Expand width
+                mobileMenu.style.transform = "translateX(0)";
+            });
+
+            // Close Mobile Menu
+            function closeMobileNav() {
+                mobileMenu.style.width = "0"; // Shrink width
+                mobileMenu.style.transform = "translateX(100%)";
+            }
+
+            closeMenu.addEventListener("click", closeMobileNav);
+
+            // Close when clicking a link
+            menuLinks.forEach(link => {
+                link.addEventListener("click", closeMobileNav);
+            });
         });
-
-        // Close the menu (slide-out to the right)
-        closeMenu.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');  // Set width back to 0
-            mobileMenu.classList.add('translate-x-full');  // Hide off-screen
-        });
-
     </script>
+
     <section id="home"
         class="section h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-indigo-600 text-white fade-in">
         <div class="text-center">
